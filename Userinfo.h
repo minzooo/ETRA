@@ -1,17 +1,20 @@
 #pragma once
+
 #include <iostream>
 #include <map>
 #include <string>
+using namespace std;
 
 class Userinfo
 {
 private:
-	map<string, string> u_data;
-	map<string, string> m_data;
+	map <CString, CString> u_data;
+	map <CString, CString> m_data;
 
 public:
 	void make_testdata();
-	void greeter(string, string);
+	int greeter(CString, CString);
 
 	//void test_wrong_login();
 };
+

@@ -9,8 +9,11 @@ private:
 	userhome userhome;
 	Management management;
 
-	string posttext;
+	CString posttitle;
+	CString posttext;
 	int article_Snum;
+
+
 public:
 
 	Managerhome();

@@ -4,6 +4,7 @@
 #include<string>
 #include<cstring>
 #include<vector>
+#include "pch.h"
 
 #include "Reaction.h"
 #include "Autofilter.h"
@@ -15,19 +16,20 @@ Reaction::Reaction()
 	latest_reply = 0;
 }
 
-string Reaction::reply_view(int reply_serial)
+
+CString Reaction::reply_view(int reply_serial)
 {
-	// Management.get_reply_text(reaction_reply_text);
-	//cout << reaction_reply_text[reply_serial] << "\n";
+	// Management.get_reply_text(reaction_reply_text); 
 	return reaction_reply_text[reply_serial];
 }
 
 
-void Reaction::reply_write(int es, int ns, int as , string text_reply)
+
+void Reaction::reply_write(int es, int ns, int as , CString text_reply)
 {
 	management.get_reply_text(reaction_reply_text);
 	management.get_reply_info(reaction_reply_info);
-	int latest_reply = 0;
+	
 	for (auto& iter : reaction_reply_text) {
 		latest_reply = iter.first;
 	}
@@ -117,8 +119,8 @@ void Reaction::Sort_reply_latest()
 
 void Reaction::Sort_reply_likes()
 {
-	multimap<int, string, greater<int>>under_likes;
-	multimap<int, string, greater<int>>::iterator iter_3;
+	multimap<int, CString, greater<int>>under_likes;
+	multimap<int, CString, greater<int>>::iterator iter_3;
 
 	management.get_reply_info(reaction_reply_info);
 	management.get_reply_text(reaction_reply_text);
@@ -143,7 +145,6 @@ void Reaction::LnD_save(int serial_number,int preference)
 
 	if (serial_number % 4 == 0)
 	{
-		//int preference;
 		//cout << "Show your preference (like = 0, dislike = 1)" << "\n";
 		//cin >> preference;
 		if (preference == 0)
@@ -263,4 +264,3 @@ void Reaction::keyword_show()
 		cout << "Unable to open file";
 	}
 }
-

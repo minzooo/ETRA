@@ -1,19 +1,20 @@
 #include <iostream>
 #include <string>
 #include <array>
+#include "pch.h"
 
 
 using namespace std;
 #include "Autofilter.h"
 
 
-string Autofilter(string text_reply)
+CString Autofilter(CString text_reply)
 {
-	array<string, 3> deadwordlist = { "stupid", "idiot", "dumb" };
+	array<CString, 3> deadwordlist = { L"stupid", L"idiot", L"dumb" };
 
 	for (int i = 0; i < deadwordlist.size(); i++)
 	{
-		if (text_reply.find(deadwordlist[i]) == string::npos)
+		if (text_reply.Find(deadwordlist[i]) == string::npos)
 		{
 			continue;
 		}

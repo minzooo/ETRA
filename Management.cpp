@@ -3,7 +3,8 @@
 #include <map>
 #include <string.h>
 #include<vector>
-#include "Management.h"
+#include "pch.h"
+#include "management.h"
 using namespace std;
 
 map<int, string> newspaper =
@@ -21,36 +22,40 @@ map<int, string> newspaper =
 };
 
 
-map<int, string> event_text;
+map<int, string> event_text = {
+    {1, "거리두기"},
+    {5, "마스크"},
+    {9, "코로나"},
 
-Management::Management() 
+};
+
+Management::Management()
 {
     latest_article = 3;
 }
 
-void Management::manage_post()
+void Management::manage_post(CString title, CString text)
 {
-    string title;
-    cout << "Enter title: ";
-    cin >> title;
+    //CString title;
+   // cout << "Enter title: ";
+   //cin >> title;
 
-    string text;
-    cout << "Enter text: ";
-    cin >> text;
+    //CString text;
+    //cout << "Enter text: ";
+    //cin >> text;
 
-    int latest_article = 3;
+    //int latest_article = 3;
     for (auto& iter : article_text) {
         latest_article = iter.first;
     }
 
     latest_article += 4;
-
+    
     // 같은 기사 고유번호를 키값으로 가진 article_info(e, n, reply) 만들어주는 부분
-    article_info[latest_article] = vector<int>{ 0, 0, 0 };
+    article_info[latest_article] = vector<int>{ 0, 0, 0 }; 
 
     article_title[latest_article] = title;
     article_text[latest_article] = text;
-    
 }
 
 void Management::save_report(int reply_serial)
@@ -86,20 +91,19 @@ void Management::numbering() {
     LnD_databynewspaper[latest_newspaper] = vector<int>{ 0, 0 };
     LnD_databyarticle[latest_article] = vector<int>{ 0, 0 };
     
-
     //cout << "Which newspaper: ";
     //cin >> newspapers;
 
-    for (int j = 2; j < (article_info.size()) * 4 + 2; j += 4) {
+    for (unsigned int j = 2; j < (article_info.size()) * 4 + 2; j += 4) {
         if (newspapers == newspaper[j]) {
             vector<int> temp = article_info[latest_article];
             temp[1] = j;
             break;
         }
         else {
-            string n_newspapers;
-            cout << "Which newspaper: ";
-            cin >> n_newspapers;
+            CString n_newspapers;
+            //cout << "Which newspaper: ";
+            //cin >> n_newspapers;
             newspaper.insert(make_pair(latest_newspaper, n_newspapers));
             vector<int> temp = article_info[latest_article];
             temp[1] = latest_newspaper;
@@ -109,20 +113,20 @@ void Management::numbering() {
     }
 
     
-    //printf("Which event: ");
+    //cout << "Which event: ";
     //cin >> events;
 
-    for (int i = 1; i < (article_info.size()) * 4 + 1; i += 4) {
+    for (unsigned int i = 1; i < (article_info.size()) * 4 + 1; i += 4) {
         if (events == event_text[i]) {
             vector<int> temp = article_info[latest_article];
             temp[0] = i;
             break;
         }
         else {
-            string n_events;
-            cout << "Which event: ";
-            cin >> n_events;
-            event_text.insert(make_pair(latest_event, n_events));
+            CString n_events;
+            //cout << "Which event: ";
+            //cin >> n_events;
+            event_text.insert(std::make_pair(latest_event, n_events));
             vector<int> temp = article_info[latest_article];
             temp[0] = latest_event;
             break;
@@ -139,6 +143,7 @@ void Management::manage_del(int article_Snum) {
 
     article_text.erase(article_Snum);
     article_title.erase(article_Snum);
+    article_info.erase(article_Snum);
 
     if (reply_info[article_Snum][0] = article_Snum) {
         reply_text.erase(article_Snum);
@@ -148,9 +153,9 @@ void Management::manage_del(int article_Snum) {
 
 void Management::manage_repost(int article_Snum) {
   
-    //cout << "Enter an article number: ";
-    //cin>>article_Snum;
-    //cout << "Enter text: ";
+    // cout << "Enter an article number: ";
+    // cin >> article_Snum;
+    // cout << "Enter text: ";
 
     article_text[article_Snum] = revised_text;
 }
@@ -158,7 +163,7 @@ void Management::manage_repost(int article_Snum) {
 
 void Management::reportedreply_view()
 { 
-    for (int i = 0; i < (reply_info.size()) * 4; i += 4) {
+    for (unsigned int i = 0; i < (reply_info.size()) * 4; i += 4) {
         if (reply_info[i][3] != 0) {
             cout << reply_text[i];
         }
@@ -167,9 +172,9 @@ void Management::reportedreply_view()
 
 void Management::censor_reply() {
     int unseen = 0 ;
-    printf("Enter 0 or 1");
-    scanf("%d", unseen);
-    for (int i = 0; i < reply_text.size() + 1; i++) {
+   // printf("Enter 0 or 1");
+   // scanf("%d", unseen);
+    for (unsigned int i = 0; i < reply_text.size() + 1; i++) {
         if (unseen == 1) { // unseen 버튼을 누르는 것이 1 
             reply_text[i] = "This is improper";
         }
@@ -198,49 +203,44 @@ void Management::save_reply_info(map <int, vector<int>> temp)
 }
 
 
-void Management::get_article_text(map <int, string, greater<int>> temp)
+void Management::get_article_text(map <int, CString, greater<int>> temp)
 {
     temp = article_text;
 }
 
-void Management::save_article_text(map <int, string, greater<int>> temp)
+void Management::save_article_text(map <int, CString, greater<int>> temp)
 {
     article_text = temp;
 }
 
 
-void Management::get_reply_text(map <int, string, greater<int>> temp)
+void Management::get_reply_text(map <int, CString, greater<int>> temp)
 {
     temp = reply_text;
 }
 
-void Management::save_reply_text(map <int, string, greater<int>> temp)
+void Management::save_reply_text(map <int, CString, greater<int>> temp)
 {
     reply_text = temp;
 }
 
 
-void Management::get_event_text(map <int, string> temp)
+void Management::get_event_text(map <int, CString> temp)
 {
     temp = event_text;
 }
 
-void Management::save_event_text(map <int, string> temp)
+void Management::save_event_text(map <int, CString> temp)
 {
     event_text = temp;
 }
 
-void Management::get_newspaper(map <int, string> temp)
+void Management::get_newspaper(map <int, CString> temp)
 {
     temp = newspaper;
 }
 
-void Management::save_event_text(map <int, string> temp)
+void Management::save_newspeper(map<int, CString> temp)
 {
     newspaper = temp;
-}
-
-void Management::save_newspaper(map<int, string> temp)
-{
-    temp = newspaper;
 }

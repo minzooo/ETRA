@@ -1,5 +1,6 @@
 #include <iostream>
 #include <map>
+#include "pch.h"
 using namespace std;
 
 #include "Management.h"
@@ -13,7 +14,7 @@ Managerhome::Managerhome()
 
 void Managerhome::manage_post()
 {
-	management.manage_post();
+	management.manage_post (posttitle, posttext);
 }
 
 void Managerhome::numbering()
@@ -37,13 +38,4 @@ void Managerhome::reportedreply_view()
 void Managerhome::censor_reply()
 {
 	management.censor_reply();
-}
-
-void Managerhome::test_post()
-{
-	
-	posttext = "This is testing article text.";
-	cout << ":::::::article post& view test:::::::" << '\n'<<":::::::post:::::::" << "text: " << posttext << '\n';
-	management.manage_post();
-
 }

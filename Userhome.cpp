@@ -1,16 +1,22 @@
 
+
+#include"pch.h"
 using namespace std;
-
 #include "Userhome.h"
-#include "showingarticle.h"
-#include "Reaction.h"
+#include "Userinfo.h"
 
-Reaction reaction;
-Showing_article showingarticle;
+
+//#include "Showingarticle.h"
+//#include "Reaction.h"
+
+//Reaction reaction;
+//Showing_article showingarticle;
 
 userhome::userhome()
 {
 	choose_viewtype = 1;
+	userinfo.make_testdata();
+
 }
 
 void userhome::search()
@@ -19,16 +25,16 @@ void userhome::search()
 	//showingarticle::search(searchword);
 }
 
-void userhome::greeter(string id, string pw)
+void userhome::greeter(CString id, CString pw)
 {
-	id = user_id;
-	pw = user_pw;
+	//id = user_id;
+	//pw = user_pw;
 	userinfo.greeter(id, pw);
 }
 
 
 // Reaction
-
+/*
 void use_reply_write(int es, int ns, int as, string text_reply)
 {
 	reaction.reply_write(es, ns, as, text_reply);
@@ -45,7 +51,7 @@ void use_reply_switch(int num)
 }
 void use_reply_keyword_show()
 {
-	reaction.keyword_show();
+	reaction.reply_keyword();
 }
 void use_LnD_save(int serial_number, int preference)
 {
@@ -105,8 +111,38 @@ void views_event()
 {
 	showingarticle.views_event();
 }
-
+*/
 /*
+void userhome::test_wrong_login()
+{
+	user_id = "1234";
+	user_pw = "1234";
+	cout << "greeter test:::" << "id:" << user_id << "pw: " << user_pw << '\n';
+	userinfo.greeter(user_id, user_pw);
+
+}
+
+
+void userhome::test_proper_reply_write()
+{
+	text_reply = "Hello world!";
+	cout << ":::::::proper reply test:::::::" << '\n'<<"text: " << text_reply << '\n';
+	text_reply = Autofilter(text_reply);
+	reaction.reply_write(text_reply);
+	cout << "written reply: ";
+	reaction.reply_view(0);
+}
+
+void userhome::test_improper_reply_write()
+{
+	text_reply = "You sostupid";
+	cout << ":::::::improper reply test:::::::" << '\n' << "text: " << text_reply << '\n';
+	text_reply = Autofilter(text_reply);
+	reaction.reply_write(text_reply);
+	cout << "written reply: ";
+	reaction.reply_view(4);
+}
+
 void userhome::test_view_article()
 {
 	cout << "::::::: view :::::::" << '\n';
@@ -114,8 +150,11 @@ void userhome::test_view_article()
 	showingarticle.view_article(article_num);
 }
 
+
+
 void userhome::test_reply_write(int as, int ns, int es, string text_reply) 
 {
+	
 	as = 3;
 	ns = 2;
 	es = 1;
@@ -162,5 +201,3 @@ void userhome::test_reply_report()
 		reaction.reply_report(i);
 	}
 }*/
-
-

@@ -1,23 +1,23 @@
 #pragma once
-#pragma once
 #include "Userinfo.h"
-#include "Reaction.h"
-#include "Showingarticle.h"
-#include "Management.h"
+
+//#include "Reaction.h"
+//#include "Showingarticle.h"
+//#include "Management.h"
 
 
 class userhome
 {
 private:
 	Userinfo userinfo;
-	Reaction reaction;
-	Showing_article showingarticle;
+	//Reaction reaction;
+	//Showing_article showingarticle;
 
-	string user_id;
-	string user_pw;
+	CString user_id;
+	CString user_pw;
 
 	int choose_viewtype;
-	string text_reply;
+	CString text_reply;
 	int preference;
 	int article_num;
 	int as;
@@ -29,7 +29,7 @@ public:
 
 	userhome();
 	void search();
-	void greeter(string, string);
+	void greeter(CString, CString);
 	
 
 	/*void test_wrong_login();
@@ -41,10 +41,12 @@ public:
 	void test_reply_sorting();
 	void test_reply_report();*/
 
+	//가져다 쓸 함수
+	
 
 	// Reaction
 
-	void use_reply_write(int, int, int, string);
+	void use_reply_write(int, int, int, CString);
 	void use_reply_report(int);
 	void use_reply_switch(int);
 	void use_reply_keyword();

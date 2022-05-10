@@ -2,8 +2,9 @@
 #include <iostream>
 #include <string>
 #include <array>
+#include <atlstr.h>
 
 using namespace std;
 
-string Autofilter(string);
+CString Autofilter(CString);
 
